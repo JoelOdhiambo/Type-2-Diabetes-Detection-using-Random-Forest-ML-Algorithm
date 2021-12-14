@@ -3,13 +3,19 @@ module.exports = {
     './resources/views/**/*.blade.php',
     './resources/css/**/*.css',
   ],
-  theme: {
-    extend: {}
+
+    extend: {
+      theme: {
+        fontFamily:{
+          body:['Nunito']
+        }
+    },
   },
   variants: {
     backgroundColour:['responsive','hover','focus','active']
   },
   plugins: [
     require('@tailwindcss/ui'),
+    require('@themesberg/flowbite/plugin'),
   ]
 }

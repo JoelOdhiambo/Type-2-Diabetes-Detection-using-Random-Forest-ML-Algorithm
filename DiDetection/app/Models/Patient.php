@@ -22,6 +22,7 @@ class Patient extends Model
         'insulin',
         'bmi',
         'diabetespedegreefunction',
-        'age'
+        'age',
+        'user_id'
     ];
 }

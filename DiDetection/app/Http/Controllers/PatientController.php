@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth',['except'=>['index','show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -61,7 +66,8 @@ class PatientController extends Controller
             'insulin'=>$request->input('insulin'),
             'bmi'=>$request->input('bmi'),
             'diabetespedegreefunction'=>$request->input('pedegree'),
-            'age'=>$request->input('age')
+            'age'=>$request->input('age'),
+            'user_id'=>auth()->user()->id
         ]);
         return redirect('/patients');
     }
@@ -87,9 +93,9 @@ class PatientController extends Controller
     {
         //
 
-        $patient = Patient::find($id)->first();
+        $patient = Patient::find($id);
         // dd($id);
-        return view('patients.edit')->with('patient',$patient);
+        // return view('patients.edit')->with('patient',$patient);
     }
 
     /**

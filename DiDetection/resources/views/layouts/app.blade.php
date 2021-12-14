@@ -15,17 +15,21 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 <style>
     .active{
         color: red;
     }
 </style>
+
 </head>
 
-<body class="bg-gray-100 h-screen antialiased leading-none font-sans">
+<body class="bg-gray-100 h-screen antialiased leading-none font-body">
     <!-- <div id="app">
         <header class="bg-blue-900 py-6">
             <div class="container mx-auto flex justify-between items-center px-6">
@@ -85,9 +89,6 @@
 
                             <a href="/patients" class="text-gray-300 hover:bg-gray-700 hover:text-white active:bg-yellow-400 px-3 py-2 rounded-md text-sm font-medium">Patients</a>
 
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white active:bg-yellow-400 px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white active:bg-yellow-400 px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
                         </div>
                     </div>
                 </div>
@@ -100,9 +101,6 @@
 
                         <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Patients</a>
 
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
                     </div>
                 </div>
                 <a href="{{ route('logout') }}" class="no-underline hover:underline" onclick="event.preventDefault();
@@ -120,6 +118,39 @@
 
     @yield('content')
     </div>
+    <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
+    <script src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            var table=$('#patients-table').DataTable();
+
+            table.on('click','.edit',function () {
+                $tr=$(this).closest('tr');
+                if($($tr).hasClass('child')){
+                    $tr=$tr.prev('.parent');
+                }
+
+                var data=table.row($tr).data();
+                console.log(data);
+
+                $('name').val(data[1]);
+                $('pregnancies').val(data[2]);
+                $('glucose').val(data[3]);
+                $('bloodpressure').val(data[4]);
+                $('skinthickness').val(data[5]);
+                $('insulin').val(data[6]);
+                $('bmi').val(data[7]);
+                $('diabetespedegreefunction').val(data[8]);
+                $('age').val(data[9]);
+                
+                $('edit-patient').attr('action','/patients/',+data[0]);
+                $('edit-patients').modal('show');
+
+            });
+        });
+    </script>
 </body>
 
 </html>
