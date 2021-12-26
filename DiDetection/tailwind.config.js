@@ -1,4 +1,9 @@
 module.exports = {
+  content: [
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+    "./resources/**/*.vue",
+  ],
   purge: [
     './resources/views/**/*.blade.php',
     './resources/css/**/*.css',

@@ -15,7 +15,7 @@ class UserIdToPatientsTable extends Migration
     {
         Schema::table('patients', function (Blueprint $table) {
             //
-            $table->integer('user_id');
+            $table->integer('user_id')->nullable();
         });
     }
 

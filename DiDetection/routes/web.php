@@ -25,4 +25,5 @@ Auth::routes();
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/patients', PatientController::class);
+Route::get('/patients_vs_months', [PatientController::class, 'patients_vs_months'])->name('graph.patients.months');
 

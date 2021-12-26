@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use App\Charts\PatientsChart;
 
 class PatientController extends Controller
 {
@@ -21,8 +22,20 @@ class PatientController extends Controller
     {
         //
         $patients=Patient::all();
+        $patients_at=Patient::pluck('created_at');
+        
         // dd($patients);
+        $patients_chart= new PatientsChart;
+        
+     
         return view('patients.patients',['patients'=>$patients]);
+    }
+
+    public function patients_vs_months(Request $request){
+        $patients_per_month = Patient::selectRaw('monthname(created_at) month, count(*) data')->groupBy('month');
+        $data = $patients_per_month->pluck('data');
+        $labels = $patients_per_month->pluck('month');
+        return response()->json(['data' => $data, 'labels' => $labels]);
     }
 
     /**

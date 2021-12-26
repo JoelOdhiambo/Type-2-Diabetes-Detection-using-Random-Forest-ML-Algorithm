@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -15,17 +16,55 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-<style>
-    .active{
-        color: red;
-    }
-</style>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+   
+    <style>
+        .active {
+            color: red;
+        }
+        .button{
+
+        }
+        .button-text{
+            transition:all 0.2s;
+        }
+        .button-loading .button-text{
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .button-loading::after{
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top:50;
+            left:50;
+            margin: auto;
+            border:5px solid transparent;
+            border-top-color: white;
+            border-radius: 50%;
+            animation: button-loading-spinner 1s linear infinite;
+
+        }
+        @keyframes button-loading-spinner{
+            from{
+                transform: rotate(0turn);
+            }
+            to{
+                transform: rotate(1turn);
+            }
+        }
+    </style>
 
 </head>
 
@@ -47,7 +86,7 @@
                 <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
                 @endif
                 @else
-                
+
 
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
@@ -79,20 +118,20 @@
                     <div class="flex-shrink-0 flex items-center">
                         <img class="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
                         <img class="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow">
-                        
+
                     </div>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            
-                            <a href="{{route('home')}}" class="text-gray-300 px-3 hover:bg-gray-700 hover:text-white active:bg-yellow-400 px-3 py-2 rounded-md text-sm font-medium {{request()->is('/home')?'active':''}}" >Dashboard</a>
+
+                            <a href="{{route('home')}}" class="text-gray-300 px-3 hover:bg-gray-700 hover:text-white active:bg-yellow-400 px-3 py-2 rounded-md text-sm font-medium {{request()->is('/home')?'active':''}}">Dashboard</a>
 
                             <a href="/patients" class="text-gray-300 hover:bg-gray-700 hover:text-white active:bg-yellow-400 px-3 py-2 rounded-md text-sm font-medium">Patients</a>
 
                         </div>
                     </div>
                 </div>
-               
+
                 <!-- Mobile menu, show/hide based on menu state. -->
                 <div class="sm:hidden" id="mobile-menu">
                     <div class="px-2 pt-2 pb-3 space-y-1">
@@ -118,21 +157,24 @@
 
     @yield('content')
     </div>
+
+    
     <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
     <script src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"></script>
-    <script type="text/javascript">
-        $(document).ready(function()
-        {
-            var table=$('#patients-table').DataTable();
 
-            table.on('click','.edit',function () {
-                $tr=$(this).closest('tr');
-                if($($tr).hasClass('child')){
-                    $tr=$tr.prev('.parent');
+    <script src="{{ asset('js/common.js') }}"></script>
+    <!-- <script type="text/javascript">
+        $(document).ready(function() {
+            var table = $('#patients-table').DataTable();
+
+            table.on('click', '.edit', function() {
+                $tr = $(this).closest('tr');
+                if ($($tr).hasClass('child')) {
+                    $tr = $tr.prev('.parent');
                 }
 
-                var data=table.row($tr).data();
+                var data = table.row($tr).data();
                 console.log(data);
 
                 $('name').val(data[1]);
@@ -144,13 +186,22 @@
                 $('bmi').val(data[7]);
                 $('diabetespedegreefunction').val(data[8]);
                 $('age').val(data[9]);
-                
-                $('edit-patient').attr('action','/patients/',+data[0]);
+
+                $('edit-patient').attr('action', '/patients/', +data[0]);
                 $('edit-patients').modal('show');
 
             });
         });
+    </script> -->
+
+    @stack('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#patients-tabl').DataTable();
+
+        });
     </script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js" type="text/javascript"></script>
 </body>
 
 </html>
