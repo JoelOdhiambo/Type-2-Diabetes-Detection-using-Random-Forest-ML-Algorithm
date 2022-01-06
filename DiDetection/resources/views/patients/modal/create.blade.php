@@ -7,7 +7,7 @@
                                                         @csrf
 
                                                         <!-- This example requires Tailwind CSS v2.0+ -->
-                                                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                                                        <div class=" bg-white shadow overflow-hidden sm:rounded-lg ">
 
                                                             <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
                                                                 <h3 class="text-lg leading-6 font-medium text-gray-900">

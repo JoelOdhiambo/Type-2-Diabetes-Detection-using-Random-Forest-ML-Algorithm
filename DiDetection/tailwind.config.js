@@ -1,4 +1,5 @@
 module.exports = {
+  darkmode: 'media',
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",

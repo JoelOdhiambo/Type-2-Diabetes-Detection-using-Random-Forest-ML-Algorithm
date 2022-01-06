@@ -82,6 +82,7 @@
                                     <th scope="col" class="text-xs font-bold font-medium text-gray-700 px-6 py-3 text-left uppercase tracking-wider dark:text-gray-400">
                                         Age
                                     </th>
+                                    
                                     <th scope="col" class="relative px-6 py-3">
                                         <span class="sr-only">Edit</span>
                                     </th>
@@ -200,14 +201,10 @@
                 data: {
                     labels: patientMonthsResponse.labels,
                     datasets: [{
-                        label: '# of Votes',
+                        label: 'No. of Patients',
                         data: patientMonthsResponse.data,
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
+                            
                             'rgba(255, 159, 64, 0.2)'
                         ],
                     }],
