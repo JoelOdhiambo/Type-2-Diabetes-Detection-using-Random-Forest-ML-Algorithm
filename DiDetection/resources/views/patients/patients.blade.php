@@ -86,9 +86,11 @@
                                     <th scope="col" class="relative px-6 py-3">
                                         <span class="sr-only">Edit</span>
                                     </th>
+                                    @if (Auth::check() &&(Auth::user()->hasRole('Admin')))
                                     <th scope="col" class="relative px-6 py-3">
                                         <span class="sr-only">Delete</span>
                                     </th>
+                                    @endif
                                     <th scope="col" class="relative px-6 py-3">
                                         <span class="sr-only">Diagnose</span>
                                     </th>
@@ -141,7 +143,7 @@
                                         @include('patients.modal.diagnose')
 
                                     </td>
-                                    <td>
+                                    <td class="pr-4">
                                         <button class="flex items-center bg-blue-600 text-white px-2 py-1 text-xs font-semibold  uppercase transition-colors duration-200 transform bg-white rounded hover:bg-blue-700  focus:bg-gray-400 focus:outline-none" data-target="edit-modal" data-id="{{$patient->id}}" data-modal-toggle="edit-modal">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -153,6 +155,7 @@
 
                                         @include('patients.modal.edit')
                                     </td>
+                                    @if (Auth::check() &&(Auth::user()->hasRole('Admin')))
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <form action="/patients/{{$patient->id}}" method="post">
                                             @csrf
@@ -164,7 +167,7 @@
                                             </button>
                                         </form>
                                     </td>
-
+                                    @endif
                                 </tr>
 
                                 @endif

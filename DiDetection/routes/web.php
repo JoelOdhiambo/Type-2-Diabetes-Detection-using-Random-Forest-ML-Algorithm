@@ -27,41 +27,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => ['auth']],function () {
-        Route::get('/patients', [
-            'uses'=>'App\Http\Controllers\PatientController@index',
-            'as'=>'patients.patients',
-            'middleware'=>'roles',
-            'roles'=>['Doctor','Admin']
-        ]);
-
+        
         Route::post('/home','App\Http\Controllers\HomeController@upload');
-        Route::post('/patients', [
-            'uses'=>'App\Http\Controllers\PatientController@store',
-            'as'=>'patients.patients',
-            'middleware'=>'roles',
-            'roles'=>['Doctor','Admin']
-        ]);
-
-        Route::post('/patients/{{$patient->id}}', [
-            'uses'=>'App\Http\Controllers\PatientController@edit',
-            'as'=>'patients.patients',
-            'middleware'=>'roles',
-            'roles'=>['Doctor','Admin']
-        ]);
-
-        Route::post('/patients', [
-            'uses'=>'App\Http\Controllers\PatientController@destroy',
-            'as'=>'patients.patients',
-            'middleware'=>'roles',
-            'roles'=>['Doctor','Admin']
-        ]);
-
-        Route::post('/patients', [
-            'uses'=>'App\Http\Controllers\PatientController@update',
-            'as'=>'patients.patients',
-            'middleware'=>'roles',
-            'roles'=>['Doctor','Admin']
-        ]);
+        Route::resource('/patients', PatientController::class);
 
         Route::get('/admin', [
             'uses'=>'App\Http\Controllers\AdminController@index',

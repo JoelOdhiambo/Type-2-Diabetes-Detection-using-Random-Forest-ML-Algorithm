@@ -9,7 +9,7 @@
 </div>
 
 <div class="flex justify-center pt-20">
-    <form action="/patients" method="post">
+    <form action="/patients/{{$id}}" method="post">
         @csrf
         
         <div class="block">
