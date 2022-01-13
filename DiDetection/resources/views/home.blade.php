@@ -78,7 +78,7 @@
                                 </dt>
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
 
-                                    @if (Auth::user()->role =='Admin')
+                                    @if (Auth::check() &&(Auth::user()->hasRole('Admin')))
                                     Admin
                                     @else
                                     Doctor
@@ -155,7 +155,7 @@
                 </div>
 
                 <div class=" bg-white shadow overflow-hidden sm:rounded-lg bg-opacity-0">
-                   
+
 
 
                     <div class="md:shrink-0 max-w-md px-8 py-4 mx-auto mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800">
