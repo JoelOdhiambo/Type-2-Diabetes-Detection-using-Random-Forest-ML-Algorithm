@@ -53,3 +53,4 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 // Route::get('/patients', [\App\Http\Controllers\PatientController::class, 'index'])->name('patients');
         
 Route::get('/patients_vs_months', [PatientController::class, 'patients_vs_months'])->name('graph.patients.months');
+Route::get('/inference', [PatientController::class, 'inference'])->name('patient.inference');
