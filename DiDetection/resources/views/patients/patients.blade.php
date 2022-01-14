@@ -9,7 +9,7 @@
     <div class="pt-6 md:p-8 text-center md:text-left w-screen h-screen space-y-4">
 
         @if (Auth::user())
-        <div class="shadow-lg rounded-lg overflow-hidden">
+        <div class="shadow-lg rounded-lg overflow-hidden container mx-auto">
             <div class="py-3 px-5 bg-gray-50"><span class="mx-1 font-bold">Analytics</span></div>
             <div class="grid grid-cols-3 gap-4">
                 <div><canvas class="p-10" id="chartBar" style="width:100%;height:400px;"></canvas></div>
@@ -45,10 +45,10 @@
 
 
         <div class="flex flex-col">
-            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="overflow-hidden sm:rounded-lg shadow-md">
-                        <table id="patients-table" class="min-w-full">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8 ">
+                <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8 ">
+                    <div class="overflow-hidden sm:rounded-lg shadow-md ">
+                        <table id="patients-table" class="table-auto">
 
                             <thead class="bg-gray-200 dark:bg-gray-700 ">
                                 <tr>
