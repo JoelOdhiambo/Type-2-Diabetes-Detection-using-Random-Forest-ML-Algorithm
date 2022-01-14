@@ -15,7 +15,7 @@ class PatientController extends Controller
     }
     /**
      * Display a listing of the resource.
-     *
+     * Submodule test comment
      * @return \Illuminate\Http\Response
      */
     public function index()
