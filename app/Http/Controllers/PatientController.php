@@ -6,6 +6,7 @@ use App\Models\Patient;
 use Illuminate\Http\Request;
 use App\Charts\PatientsChart;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class PatientController extends Controller
 {
@@ -32,6 +33,11 @@ class PatientController extends Controller
         return view('patients.patients', ['patients' => $patients]);
     }
 
+    public function getAllPatients(){
+        $data = Patient::all();
+        return response()->json(['data' => $data]);
+    }
+
     public function patients_vs_months(Request $request)
     {
         $patients_per_month = Patient::selectRaw('monthname(created_at) month, count(*) data')->groupBy('month');
@@ -42,11 +48,18 @@ class PatientController extends Controller
 
     public function inference(Request $request)
     {
+        $request->validate(['patient_id' => 'required', 'patient_records' => 'required']);
 
-        $instances = [[1, 2, 3, 4, 5, 6, 7, 8]];
-        $data = ["signature_name" => "serving_default", "instances" => $instances];
+
+        $patient_id = $request->get('patient_id');
+        $instances = $request->get('patient_records');
+        $instances = array_map('floatval', $instances);
+        $data = ["signature_name" => "serving_default", "instances" => [$instances]];
         $predictions = Http::post(env('INFERENCE_URL'), $data);
         $predictions = json_decode($predictions->getBody());
+
+        #Todo: use $prediction to insert result in table
+
         return response()->json(['result' => $predictions]);
     }
 
@@ -135,15 +148,15 @@ class PatientController extends Controller
     {
         //
         $patient = Patient::where('id', $id)->update([
-            'name' => $request->input('name'),
-            'pregnancies' => $request->input('pregnancies'),
-            'glucose' => $request->input('glucose'),
-            'bloodpressure' => $request->input('bloodpressure'),
-            'skinthickness' => $request->input('skinthickness'),
-            'insulin' => $request->input('insulin'),
-            'bmi' => $request->input('bmi'),
-            'diabetespedegreefunction' => $request->input('pedegree'),
-            'age' => $request->input('age')
+            'name' => $request->input('Name'),
+            'pregnancies' => $request->input('Pregnancies'),
+            'glucose' => $request->input('Glucose'),
+            'bloodpressure' => $request->input('Bloodpressure'),
+            'skinthickness' => $request->input('Skinthickness'),
+            'insulin' => $request->input('Insulin'),
+            'bmi' => $request->input('Bmi'),
+            'diabetespedegreefunction' => $request->input('Pedegree'),
+            'age' => $request->input('Age')
         ]);
 
         return redirect('/patients');

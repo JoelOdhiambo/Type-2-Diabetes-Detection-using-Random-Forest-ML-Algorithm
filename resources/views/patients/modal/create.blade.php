@@ -81,7 +81,7 @@
                                                                             BMI
                                                                         </dt>
                                                                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                                                            <input type="number" name="bmi" id="bmi" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="BMI..." required>
+                                                                            <input type="number" step="any" name="bmi" id="bmi" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="BMI..." required>
 
                                                                         </dd>
                                                                     </div>
@@ -89,7 +89,7 @@
                                                                         <dt class="text-sm font-medium text-gray-500">
                                                                             Pedigree
                                                                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                                                            <input type="number" name="pedegree" id="pedegree" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Diabetes Pedegree Function..." required>
+                                                                            <input type="number" step="any" name="pedegree" id="pedegree" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Diabetes Pedegree Function..." required>
 
                                                                         </dd>
                                                                     </div>

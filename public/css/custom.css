@@ -1,0 +1,5 @@
+		/*Form fields*/
+		.dataTables_wrapper select{
+            width: 80px;  
+            margin-bottom: 15px;
+        }

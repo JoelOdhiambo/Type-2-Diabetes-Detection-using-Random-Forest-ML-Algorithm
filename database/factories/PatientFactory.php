@@ -33,6 +33,7 @@ class PatientFactory extends Factory
             'bmi' => $this->faker->randomDigit(),
             'diabetespedegreefunction' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 5),
             'age' => $this->faker->randomDigit(),
+            'diagnosis'=>$this->faker->randomDigit(),
             'user_id' => $this->faker->randomDigitNot(0,2,3,4,5,6,7,8,9)
         ];
     }

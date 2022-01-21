@@ -27,7 +27,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => ['auth']],function () {
-        
+        Route::put('/patients','App\Http\Controllers\PatientController@update');
         Route::post('/home','App\Http\Controllers\HomeController@upload');
         Route::resource('/patients', PatientController::class);
 
@@ -51,6 +51,6 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 
 // Route::resource('/patients', PatientController::class);
 // Route::get('/patients', [\App\Http\Controllers\PatientController::class, 'index'])->name('patients');
-        
+Route::get('/all_patients', [\App\Http\Controllers\PatientController::class, 'getAllPatients'])->name('patients.all');      
 Route::get('/patients_vs_months', [PatientController::class, 'patients_vs_months'])->name('graph.patients.months');
-Route::get('/inference', [PatientController::class, 'inference'])->name('patient.inference');
+Route::post('/inference', [PatientController::class, 'inference'])->name('patient.inference');

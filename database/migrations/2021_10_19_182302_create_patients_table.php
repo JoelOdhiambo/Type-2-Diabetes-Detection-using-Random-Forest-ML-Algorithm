@@ -24,6 +24,7 @@ class CreatePatientsTable extends Migration
             $table->float('bmi');
             $table->float('diabetespedegreefunction');
             $table->integer('age');
+            $table->string('diagnosis')->nullable();
             $table->timestamps();
         });
     }

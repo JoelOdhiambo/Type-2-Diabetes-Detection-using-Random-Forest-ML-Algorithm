@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
 
 
     <!-- CSRF Token -->
@@ -15,6 +16,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,8 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
     <script>
@@ -34,6 +35,8 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
+
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
     <style>
         .active {
@@ -99,7 +102,7 @@
         <div class="container flex flex-wrap justify-between items-center mx-auto">
             <a href="{{route('home')}}" class="flex items-center">
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 dark:text-white" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
                 </svg>
                 <span class="self-center text-lg font-semibold whitespace-nowrap dark:text-white">110855</span>
@@ -107,9 +110,9 @@
 
 
             @guest
-            <a class="no-underline hover:underline font-medium" href="{{ route('login') }}">{{ __('Login') }}</a>
+            <a class="no-underline hover:underline font-medium dark:text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
             @if (Route::has('register'))
-            <a class="no-underline hover:underline font-medium" href="{{ route('register') }}">{{ __('Register') }}</a>
+            <a class="no-underline hover:underline font-medium dark:text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
             @endif
             @else
             <div class="flex items-center md:order-2">
@@ -156,9 +159,9 @@
             </div>
             <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
                 <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-                    <li>
+                    <!-- <li>
                         <a href="{{route('home')}}" class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="{{route('home')}}" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 {{(request()->is('/home'))?'active':''}}">Dashboard</a>
                     </li>
@@ -198,7 +201,6 @@
 
     <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
     <script src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"></script>
 
     <script src="{{ asset('js/common.js') }}"></script>
     <!-- <script type="text/javascript">
@@ -232,12 +234,6 @@
     </script> -->
 
     @stack('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#patients-tabl').DataTable();
-
-        });
-    </script>
 
     <script>
         var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
