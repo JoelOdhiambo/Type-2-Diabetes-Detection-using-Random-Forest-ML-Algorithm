@@ -24,5 +24,6 @@ class Patient extends Model
         'diabetespedegreefunction',
         'age',
         'user_id',
+        'diagnosis'
     ];
 }

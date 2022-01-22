@@ -33,7 +33,8 @@ class PatientController extends Controller
         return view('patients.patients', ['patients' => $patients]);
     }
 
-    public function getAllPatients(){
+    public function getAllPatients()
+    {
         $data = Patient::all();
         return response()->json(['data' => $data]);
     }
@@ -45,6 +46,24 @@ class PatientController extends Controller
         $labels = $patients_per_month->pluck('month');
         return response()->json(['data' => $data, 'labels' => $labels]);
     }
+
+    public function patients_with_diabetes(Request $request)
+    {
+        $patients_per_month = Patient::where('diagnosis', 1)->selectRaw('monthname(created_at) month, count(*) data')->groupBy('month');
+        $data = $patients_per_month->pluck('data');
+        $labels = $patients_per_month->pluck('month');
+        return response()->json(['data' => $data, 'labels' => $labels]);
+    }
+
+    public function patients_without_diabetes(Request $request)
+    {
+        $patients_per_month = Patient::where('diagnosis', 0)->selectRaw('monthname(created_at) month, count(*) data')->groupBy('month');
+        $data = $patients_per_month->pluck('data');
+        $labels = $patients_per_month->pluck('month');
+        return response()->json(['data' => $data, 'labels' => $labels]);
+    }
+
+
 
     public function inference(Request $request)
     {
@@ -58,8 +77,9 @@ class PatientController extends Controller
         $predictions = Http::post(env('INFERENCE_URL'), $data);
         $predictions = json_decode($predictions->getBody());
 
+        Log::info($predictions);
         #Todo: use $prediction to insert result in table
-
+        Patient::findOrFail($patient_id)->update(['diagnosis' => 0]);
         return response()->json(['result' => $predictions]);
     }
 
@@ -146,20 +166,25 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $patient = Patient::where('id', $id)->update([
-            'name' => $request->input('Name'),
-            'pregnancies' => $request->input('Pregnancies'),
-            'glucose' => $request->input('Glucose'),
-            'bloodpressure' => $request->input('Bloodpressure'),
-            'skinthickness' => $request->input('Skinthickness'),
-            'insulin' => $request->input('Insulin'),
-            'bmi' => $request->input('Bmi'),
-            'diabetespedegreefunction' => $request->input('Pedegree'),
-            'age' => $request->input('Age')
+        $request->validate([
+            'name' => 'required', 'pregnancies' => 'required',
+            'glucose' => 'required', 'bloodpressure' => 'required',
+            'skinthickness' => 'required', 'insulin' => 'required',
+            'diabetespedegreefunction' => 'required', 'age' => 'required'
+        ]);
+        Patient::findOrFail($id)->update([
+            'name' => $request->input('name'),
+            'pregnancies' => $request->input('pregnancies'),
+            'glucose' => $request->input('glucose'),
+            'bloodpressure' => $request->input('bloodpressure'),
+            'skinthickness' => $request->input('skinthickness'),
+            'insulin' => $request->input('insulin'),
+            'bmi' => $request->input('bmi'),
+            'diabetespedegreefunction' => $request->input('diabetespedegreefunction'),
+            'age' => $request->input('age')
         ]);
 
-        return redirect('/patients');
+        return response()->json(['message' => 'Patient record updated successfully']);
     }
 
     /**
@@ -171,9 +196,7 @@ class PatientController extends Controller
     public function destroy(Patient $patient)
     {
         //
-
         $patient->delete();
-
-        return redirect('/patients');
+        return response()->json(['message' => 'Patient record deleted successfully']);
     }
 }

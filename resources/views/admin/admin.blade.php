@@ -2,8 +2,9 @@
 @section('content')
 
 <!-- Chart JS script -->
+<!-- Main modal -->
 
-
+<!-- Modal toggle -->
 
 <figure class="md:flex bg-gray-100  p-8 md:p-0 ">
     <div class="pt-6 md:p-8 text-center md:text-left w-screen h-screen space-y-4">
