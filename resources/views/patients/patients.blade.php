@@ -235,10 +235,14 @@
                 try {
                     const patientData = {
                         patient_id: data.id,
-                        patient_records: [data.pregnancies, data.glucose, data.bloodpressure, data
-                            .skinthickness, data.insulin, data.bmi, data
-                            .diabetespedegreefunction, data.age
-                        ]
+                        pregnancies: data.pregnancies,
+                        glucose: data.glucose,
+                        bloodpressure: data.bloodpressure,
+                        skinthickness: data.skinthickness,
+                        bmi: data.bmi,
+                        insulin: data.insulin,
+                        diabetespedegreefunction: data.diabetespedegreefunction,
+                        age: data.age
                     }
                     const response = await ajaxRequest('POST', '{{ route('patient.inference') }}',
                         patientData)

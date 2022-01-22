@@ -67,13 +67,30 @@ class PatientController extends Controller
 
     public function inference(Request $request)
     {
-        $request->validate(['patient_id' => 'required', 'patient_records' => 'required']);
+        $request->validate([
+            'patient_id' => 'required',
+            'plasma_glucose_concentration' => 'required',
+            'bmi' => 'required',
+            'diabetespedegreefunction' => 'required',
+            'insulin' => 'required',
+            'skinthickness' => 'required',
+            'bloodpressure' => 'required',
+            'pregnancies' => 'required'
+        ]);
 
+        $inputs = [
+            "plasma_glucose_concentration" => [[$request->get('glucose')]],
+            "bmi" => [[$request->get('bmi')]],
+            "age" => [[$request->get('age')]],
+            "pedigree_function" => [[$request->get('diabetespedegreefunction')]],
+            "serum_insulin" => [[$request->get('insulin')]],
+            "triceps_thickness" => [[$request->get('skinthickness')]],
+            "diastolic_blood_pressure" => [[$request->get('bloodpressure')]],
+            "pregnancies" => [[$request->get('pregnancies')]]
+        ];
 
         $patient_id = $request->get('patient_id');
-        $instances = $request->get('patient_records');
-        $instances = array_map('floatval', $instances);
-        $data = ["signature_name" => "serving_default", "instances" => [$instances]];
+        $data = ["signature_name" => "serving_default", "inputs" => $inputs];
         $predictions = Http::post(env('INFERENCE_URL'), $data);
         $predictions = json_decode($predictions->getBody());
 
