@@ -69,7 +69,7 @@ class PatientController extends Controller
     {
         $request->validate([
             'patient_id' => 'required',
-            'plasma_glucose_concentration' => 'required',
+            'glucose' => 'required',
             'bmi' => 'required',
             'diabetespedegreefunction' => 'required',
             'insulin' => 'required',
@@ -79,25 +79,32 @@ class PatientController extends Controller
         ]);
 
         $inputs = [
-            "plasma_glucose_concentration" => [[$request->get('glucose')]],
-            "bmi" => [[$request->get('bmi')]],
-            "age" => [[$request->get('age')]],
-            "pedigree_function" => [[$request->get('diabetespedegreefunction')]],
-            "serum_insulin" => [[$request->get('insulin')]],
-            "triceps_thickness" => [[$request->get('skinthickness')]],
-            "diastolic_blood_pressure" => [[$request->get('bloodpressure')]],
-            "pregnancies" => [[$request->get('pregnancies')]]
+            "plasma_glucose_concentration" => [[floatval($request->get('glucose'))]],
+            "bmi" => [[floatval($request->get('bmi'))]],
+            "age" => [[floatval($request->get('age'))]],
+            "pedigree_function" => [[floatval($request->get('diabetespedegreefunction'))]],
+            "serum_insulin" => [[floatval($request->get('insulin'))]],
+            "triceps_thickness" => [[floatval($request->get('skinthickness'))]],
+            "diastolic_blood_pressure" => [[floatval($request->get('bloodpressure'))]],
+            "pregnancies" => [[floatval($request->get('pregnancies'))]]
         ];
 
         $patient_id = $request->get('patient_id');
         $data = ["signature_name" => "serving_default", "inputs" => $inputs];
         $predictions = Http::post(env('INFERENCE_URL'), $data);
         $predictions = json_decode($predictions->getBody());
+        $diagnosis = NULL;
+        if ($predictions->outputs) {
+            if ($predictions->outputs[0][0] >= 0.5) {
+                $diagnosis = 1;
+            } else {
+                $diagnosis = 0;
+            }
+        }
 
-        Log::info($predictions);
         #Todo: use $prediction to insert result in table
-        Patient::findOrFail($patient_id)->update(['diagnosis' => 0]);
-        return response()->json(['result' => $predictions]);
+        Patient::findOrFail($patient_id)->update(['diagnosis' => $diagnosis]);
+        return response()->json(['result' => $predictions->outputs]);
     }
 
 
