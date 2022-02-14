@@ -55,19 +55,19 @@
                                         Pregnancies
                                     </th>
                                     <th scope="col" class="text-xs font-bold font-medium text-gray-700 px-6 py-3 text-left uppercase tracking-wider dark:text-gray-400">
-                                        Glucose
+                                        Glucose <p class="lowercase">(mg/dl)</p>
                                     </th>
                                     <th scope="col" class="text-xs font-bold font-medium text-gray-700 px-6 py-3 text-left uppercase tracking-wider dark:text-gray-400">
-                                        Blood Pressure
+                                        Blood Pressure <p class="lowercase">(mm Hg)</p>
                                     </th>
                                     <th scope="col" class="text-xs font-bold font-medium text-gray-700 px-6 py-3 text-left uppercase tracking-wider dark:text-gray-400">
-                                        Skin Thickness
+                                        Skin Thickness <p class="lowercase">(mm)</p>
                                     </th>
                                     <th scope="col" class="text-xs font-bold font-medium text-gray-700 px-6 py-3 text-left uppercase tracking-wider dark:text-gray-400">
-                                        Insulin
+                                        Insulin <p class="lowercase">(u/ml)</p>
                                     </th>
                                     <th scope="col" class="text-xs font-bold font-medium text-gray-700 px-6 py-3 text-left uppercase tracking-wider dark:text-gray-400">
-                                        BMI
+                                        BMI <p class="lowercase">(kg/m2)</p>
                                     </th>
                                     <th scope="col" class="text-xs font-bold font-medium text-gray-700 px-6 py-3 text-left uppercase tracking-wider dark:text-gray-400">
                                         Pedigree Fx
